@@ -1,0 +1,14 @@
+# Attiva il motore di riscrittura delle URL
+RewriteEngine On
+
+# Reindirizza www.saidelgroup.com a saidelgroup.com
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
+
+# Reindirizza tutte le richieste alla home (index.php)
+RewriteCond %{REQUEST_URI} !^/index\.php$ [NC]
+RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|ico)$ [NC]
+RewriteRule ^(.*)$ /index.php [L,R=301]
+
+# Impedisci di bloccare direttamente l'accesso a file e directory esistenti
+ErrorDocument 404 /index.php
